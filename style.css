@@ -1,0 +1,63 @@
+/* Eliminamos márgenes y ponemos fondo de página negro */
+/* html,body {
+    margin:0;
+  } */
+  
+  /* Animación del personaje */
+  #bird {
+    /* Tamaño de la viñeta individual */
+    width:79px;
+    height:71px;
+    /* Cómo hay establecido un tamaño, centramos con margin:auto */
+    margin:auto;  
+    /* Cargamos el sprite (el repeat-x se puede omitir, por defecto se repite) */
+    background:url(bird2.png) repeat-x;
+    /* Aplicamos la animación "walk": 0.8seg, 6 viñetas y repetimos infinitamente */
+    animation:walk .4s steps(4) infinite;
+    /* Posicionamos el personaje sobre el camino de madera */
+    position:relative;
+    top:245px;
+  }
+  
+  /* Animación de personaje caminando: Simplemente mueve el sprite sheet hacia la izquierda, realizando el movimiento. */
+  @keyframes walk {
+    /* Partimos de la primera viñeta del sprite sheet */
+    0% { background-position:0 }
+    /* El tamaño total de ancho del sprite. Es negativo para que no "camine" hacia atrás */
+    100% { background-position:-325px }
+  }
+  
+  /* Animación del cielo. Efecto "Parallax", va más lento que el mar. */
+  #city {
+    background:url(fondo1.png) repeat-X;
+    height: 700px;
+    animation: movebg 9s linear infinite;
+    position: relative;
+  }
+  
+  /* Animación del mar. */
+  #pipeline{
+    background:url(spritesheet2.png) repeat-x;
+    height:500px;
+    animation: movebg 6s linear infinite;
+    /* Posicionamos el mar, para que no solape al cielo */
+    position:relative;
+    top:50px;
+  }
+  
+  /* Animación para mover cielo y mar */
+  @keyframes movebg {
+    0% { background-position:300px } 
+    100% { background-position:0 }
+  }
+
+
+  /* #cuadrado{
+    background-color: #3bd980;
+    height: 100px;
+    width: 100px;
+    top: 0px;
+    left: 0px;
+    border-radius: 10px;
+    position: absolute;
+ } */
