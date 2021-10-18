@@ -3,6 +3,12 @@
     margin:0;
   } */
   
+  #gameContainer{
+    width: 900px;
+    height: 600px;
+    border: solid coral 3px;
+    
+  }
   /* Animación del personaje */
   #bird {
     /* Tamaño de la viñeta individual */
@@ -16,7 +22,7 @@
     animation:walk .4s steps(4) infinite;
     /* Posicionamos el personaje sobre el camino de madera */
     position:relative;
-    top:245px;
+    top:150px;
   }
   
   /* Animación de personaje caminando: Simplemente mueve el sprite sheet hacia la izquierda, realizando el movimiento. */
@@ -30,19 +36,45 @@
   /* Animación del cielo. Efecto "Parallax", va más lento que el mar. */
   #city {
     background:url(fondo1.png) repeat-X;
-    height: 700px;
+    height: 600px;
+    
     animation: movebg 9s linear infinite;
     position: relative;
+  
   }
   
   /* Animación del mar. */
   #pipeline{
-    background:url(spritesheet2.png) repeat-x;
-    height:500px;
-    animation: movebg 6s linear infinite;
-    /* Posicionamos el mar, para que no solape al cielo */
-    position:relative;
-    top:50px;
+    /* background:url(p.png) no-repeat; */
+    height:100%;
+    width:100px;
+     position: absolute;  
+    /* justify-content: space-between; */
+    animation: pipe .50s linear .20s infinite;
+    
+  }
+
+  #topPipe{
+    height: 200px;
+    width: 100%;   
+    background:url("p.png") repeat-x;
+    transform: rotate(180deg);
+    position: relative;
+    /* margin-top: 30px; */
+    /* margin: 200px; */
+    /* animation: pipe .20s linear 10s infinite  ; */
+    background-size: cover; 
+  }
+
+  #bottomPipe{
+    height: 200px;
+    width: 100%;
+    margin-top: 100px; 
+    position: relative;
+    background:url("p.png") repeat-x;
+
+    /* background-image: url("pipe.png"); */
+    background-size: cover; 
   }
   
   /* Animación para mover cielo y mar */
@@ -52,12 +84,8 @@
   }
 
 
-  /* #cuadrado{
-    background-color: #3bd980;
-    height: 100px;
-    width: 100px;
-    top: 0px;
-    left: 0px;
-    border-radius: 10px;
-    position: absolute;
- } */
+  @keyframes pipe {
+    0%   { background-position: 0px; }
+    100% { background-position: 100%; }
+  }
+

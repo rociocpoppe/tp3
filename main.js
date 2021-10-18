@@ -1,7 +1,12 @@
 
 let x = 0;
 let y = 0;
-let bird = document.getElementById('bird');
+const bird = document.getElementById('bird');
+const pipeline = document.getElementById("pipeline")
+const topPipe = document.getElementById("topPipe")
+const bottomPipe = document.getElementById("bottomPipe");
+const container=document.getElementById("gaemContainer");
+
 
 /*
 *Al llevar el eje de coordenadas al documento html hacemos una traducción
@@ -35,7 +40,62 @@ function movimiento(event){
 }
 
 function mantener(){
-    
+
 }
 window.onkeyup = movimiento;
 window.onkeydown=mantener;
+
+function pierde(){
+  
+    const tocaIzq = bird.offsetLeft >= topPipe.offsetLeft - bird.clientWidth;
+  
+    // const offsetRightPipe = (pipeline.offsetLeft + 2 * bird.clientWidth);
+
+    // const behind = offsetRightPipe < bird.offsetLeft;
+
+    // const isColumnLine = tocaIzq && !behind;
+
+    // if (!isColumnLine) return false;
+
+    // const touchingTop = bird.offsetTop <= topPipe.offsetHeight;
+
+    // const touchingBotton = bird.offsetTop <= bottomPipe.offsetHeight;
+    // console.log("perdio");
+    // return (touchingTop || touchingBotton);
+    
+   
+}
+
+pierde();
+
+
+function setPipeSize() {
+
+    const alturaDisponible = innerHeight - 150;
+    console.log(alturaDisponible);
+    const bottomHeight = Math.floor(Math.random() * (alturaDisponible + 1));
+    bottomPipe.style.height = `${bottomHeight}px`;
+    const upperHeight = alturaDisponible - bottomHeight;
+    topPipe.style.height = `${upperHeight}px`;
+}
+
+//no sirve habria que hacer un for que recorra el ancho y que vaya aumentando el margen 
+function setPipePosition(){
+    for(let i=200; i<=700; i+=200){
+       bottomPipe.style.marginLeft= `${i}px`;
+       topPipe.style.marginLeft= `${i}px`;
+     
+    }
+        // bottomPipe.style.marginLeft= `${index}px`;
+        // topPipe.style.marginLeft= `${i}px`;
+    // const anchoDisponible=700;
+    // const pos = Math.floor(Math.random() * (anchoDisponible + 1));
+    // bottomPipe.style.marginLeft= `${pos}px`;
+    // topPipe.style.marginLeft= `${pos}px`;
+}
+
+pipeline.addEventListener("animationiteration", () => {
+    setPipeSize();
+   // setPipePosition();
+    // bottomPipe.style.marginLeft=`30px`;
+});
