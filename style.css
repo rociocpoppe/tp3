@@ -4,14 +4,15 @@
   } */
   
   #gameContainer{
-    width: 900px;
-    height: 600px;
+    width: 100%;
+    height: 100%;
     border: solid coral 3px;
     
   }
   /* Animación del personaje */
   #bird {
     /* Tamaño de la viñeta individual */
+    border: solid black 3px;
     width:79px;
     height:71px;
     /* Cómo hay establecido un tamaño, centramos con margin:auto */
@@ -48,18 +49,21 @@
     /* background:url(p.png) no-repeat; */
     height:100%;
     width:100px;
-     position: absolute;  
+     position: absolute; 
+     margin-left:900px; 
     /* justify-content: space-between; */
     animation: pipe .50s linear .20s infinite;
     
   }
 
   #topPipe{
+    border: solid black 3px;
     height: 200px;
     width: 100%;   
     background:url("p.png") repeat-x;
     transform: rotate(180deg);
     position: relative;
+    margin-right:600px;
     /* margin-top: 30px; */
     /* margin: 200px; */
     /* animation: pipe .20s linear 10s infinite  ; */
@@ -67,12 +71,13 @@
   }
 
   #bottomPipe{
+    border: solid black 3px;
     height: 200px;
     width: 100%;
     margin-top: 100px; 
+    margin-right:600px;
     position: relative;
     background:url("p.png") repeat-x;
-
     /* background-image: url("pipe.png"); */
     background-size: cover; 
   }

@@ -15,28 +15,65 @@ const container=document.getElementById("gaemContainer");
 *En el eje de coordenadas incremetamos para mover hacia arriba, en el top decrementamos
 *para empujar hacias arriba.
 */
-
+// console.log(bottomPipe.getBoundingClientRect());
 function movimiento(event){
+    let widthBird=bird.getBoundingClientRect().width;
+    let heightBird=bird.getBoundingClientRect().height;
+    let birdX=bird.getBoundingClientRect().x+ widthBird;
+    let birdY=bird.getBoundingClientRect().y+ heightBird;
+    let bottomPipeX=bottomPipe.getBoundingClientRect().x;
+    let bottomPipeY=bottomPipe.getBoundingClientRect().y;
+    let topPipeX=topPipe.getBoundingClientRect().x;
+    let topPipeY=topPipe.getBoundingClientRect().y;
+    let bottomPipeWidth=bottomPipe.getBoundingClientRect().width;
+    let bottomPipeHeight=bottomPipe.getBoundingClientRect().height;
+    let topPipeWidth=bottomPipe.getBoundingClientRect().width;
+    let topPipeHeight=bottomPipe.getBoundingClientRect().height;
+    let birdYT=bird.getBoundingClientRect().y;
+    if(birdX>=topPipeX && birdX<=topPipeX + topPipeWidth
+       && birdYT>= topPipeY && birdYT<=topPipeY+ topPipeHeight){
+        console.log("cae arriba");
+    }
+    //chequeada
+    if(birdX>=bottomPipeX && birdX<=bottomPipeX + bottomPipeWidth
+        && birdY>= bottomPipeY && birdY<=bottomPipeY+ bottomPipeHeight){
+         console.log("cae");
+     }
+    // console.log(bird.getBoundingClientRect());
+    // console.log(bottomPipe.getBoundingClientRect());
+    // let topBird=bird.getBoundingClientRect().top;
+    // let bottomBird=bird.getBoundingClientRect().bottom;
+    // let rightBird=bird.getBoundingClientRect().right;
+    // let pipeTop=topPipe.getBoundingClientRect().bottom;
+    // let pipeBottom=bottomPipe.getBoundingClientRect().top-100;
+    // let topPipeLeft=topPipe.getBoundingClientRect().left+10;
+    // let bottomPipeLeft=bottomPipe.getBoundingClientRect().left+10;
+    //  if(topBird>=pipeTop || bottomBird>=pipeBottom|| rightBird>=topPipeLeft || rightBird>=bottomPipeLeft){
+    //      console.log("cae");
+    
+    //  }
 	if(event.keyCode == '39'){//derecha
-		x= x + 50;
+        
+       
+		x= x+1;
 		bird.style.left = x + 'px';
 	}
 
 	if(event.keyCode == '37'){//Izquierda
-		x= x - 50;
+		x= x - 10;
 		bird.style.left = x +'px';	
 	}
 	
 	if(event.keyCode == '38'){//arriba
-		y = y + 50;                               
+		y = y + 10;                               
 		bird.style.top = (-y) + 'px';
 	}
 
 	if(event.keyCode == '40'){//abajo
-		y = y - 50;                            
+		y = y - 10;                            
 		bird.style.top = (-y) + 'px';
 	}
-
+     
 }
 
 function mantener(){
@@ -46,7 +83,9 @@ window.onkeyup = movimiento;
 window.onkeydown=mantener;
 
 function pierde(){
-  
+ 
+    // console.log(bird.getBoundingClientRect());
+    // console.log(topPipe.offsetLeft);
     const tocaIzq = bird.offsetLeft >= topPipe.offsetLeft - bird.clientWidth;
   
     // const offsetRightPipe = (pipeline.offsetLeft + 2 * bird.clientWidth);
@@ -69,33 +108,32 @@ function pierde(){
 pierde();
 
 
-function setPipeSize() {
+// function setPipeSize() {
+//     const alturaDisponible = innerHeight - 150;
+//     console.log(alturaDisponible);
+//     const bottomHeight = Math.floor(Math.random() * (alturaDisponible + 1));
+//     bottomPipe.style.height = `${bottomHeight}px`;
+//     const upperHeight = alturaDisponible - bottomHeight;
+//     topPipe.style.height = `${upperHeight}px`;
+// }
 
-    const alturaDisponible = innerHeight - 150;
-    console.log(alturaDisponible);
-    const bottomHeight = Math.floor(Math.random() * (alturaDisponible + 1));
-    bottomPipe.style.height = `${bottomHeight}px`;
-    const upperHeight = alturaDisponible - bottomHeight;
-    topPipe.style.height = `${upperHeight}px`;
-}
-
-//no sirve habria que hacer un for que recorra el ancho y que vaya aumentando el margen 
-function setPipePosition(){
-    for(let i=200; i<=700; i+=200){
-       bottomPipe.style.marginLeft= `${i}px`;
-       topPipe.style.marginLeft= `${i}px`;
+// //no sirve habria que hacer un for que recorra el ancho y que vaya aumentando el margen 
+// function setPipePosition(){
+//     for(let i=200; i<=700; i+=200){
+//        bottomPipe.style.marginLeft= `${i}px`;
+//        topPipe.style.marginLeft= `${i}px`;
      
-    }
+//     }
         // bottomPipe.style.marginLeft= `${index}px`;
         // topPipe.style.marginLeft= `${i}px`;
     // const anchoDisponible=700;
     // const pos = Math.floor(Math.random() * (anchoDisponible + 1));
     // bottomPipe.style.marginLeft= `${pos}px`;
     // topPipe.style.marginLeft= `${pos}px`;
-}
+// }
 
-pipeline.addEventListener("animationiteration", () => {
-    setPipeSize();
-   // setPipePosition();
-    // bottomPipe.style.marginLeft=`30px`;
-});
+// pipeline.addEventListener("animationiteration", () => {
+//     setPipeSize();
+//    // setPipePosition();
+//     // bottomPipe.style.marginLeft=`30px`;
+// });
