@@ -20,20 +20,30 @@
     /* Cargamos el sprite (el repeat-x se puede omitir, por defecto se repite) */
     background:url(bird2.png) repeat-x;
     /* Aplicamos la animación "walk": 0.8seg, 6 viñetas y repetimos infinitamente */
-    animation:walk .4s steps(4) infinite;
+    animation:fly .4s steps(4) infinite;
+    /* animation: fall .4s ease-in-out; */
     /* Posicionamos el personaje sobre el camino de madera */
     position:relative;
     top:150px;
+    /* -webkit-transition-timing-function: ease-in-out;
+    -moz-transition-timing-function: ease-in-out;
+    -o-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out; */
+  
   }
   
   /* Animación de personaje caminando: Simplemente mueve el sprite sheet hacia la izquierda, realizando el movimiento. */
-  @keyframes walk {
+  @keyframes fly {
     /* Partimos de la primera viñeta del sprite sheet */
     0% { background-position:0 }
     /* El tamaño total de ancho del sprite. Es negativo para que no "camine" hacia atrás */
     100% { background-position:-325px }
   }
   
+  @keyframes fall{
+    0% {background-position: 100px}
+    100% {background-position: 700px}
+  }
   /* Animación del cielo. Efecto "Parallax", va más lento que el mar. */
   #city {
     background:url(fondo1.png) repeat-X;
@@ -43,7 +53,10 @@
     position: relative;
   
   }
-  
+  @keyframes up {
+    0% {top: 150px;}
+    100% {top: 500px;}
+  }
   /* Animación del mar. */
   #pipeline{
     /* background:url(p.png) no-repeat; */
