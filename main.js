@@ -32,7 +32,12 @@ function movimiento(event){
     let birdYT=bird.getBoundingClientRect().y;
     if(birdX>=topPipeX && birdX<=topPipeX + topPipeWidth
        && birdYT>= topPipeY && birdYT<=topPipeY+ topPipeHeight){
-        console.log("cae arriba");
+         
+        bird.style.animation='up 0.95s ease-in-out ';
+        bird.style.top='500px';
+  
+// caer();
+
     }
     //chequeada
     if(birdX>=bottomPipeX && birdX<=bottomPipeX + bottomPipeWidth
@@ -55,7 +60,7 @@ function movimiento(event){
 	if(event.keyCode == '39'){//derecha
         
        
-		x= x+1;
+		x= x+10;
 		bird.style.left = x + 'px';
 	}
 
@@ -67,6 +72,7 @@ function movimiento(event){
 	if(event.keyCode == '38'){//arriba
 		y = y + 10;                               
 		bird.style.top = (-y) + 'px';
+   
 	}
 
 	if(event.keyCode == '40'){//abajo
@@ -75,6 +81,14 @@ function movimiento(event){
 	}
      
 }
+
+
+function caer(){
+
+
+	
+}
+
 
 function mantener(){
 
