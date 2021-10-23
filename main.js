@@ -5,9 +5,21 @@ const bird = document.getElementById('bird');
 const pipeline = document.getElementById("pipeline")
 const topPipe = document.getElementById("topPipe")
 const bottomPipe = document.getElementById("bottomPipe");
-const container=document.getElementById("gaemContainer");
+const container=document.getElementById("gameContainer");
+let birdLeft = 10;
+let birdBottom = 100;
+let gravity = 3;
+let gap = 50;
+let isGameOver=false;
 
 
+
+    function startGame() {
+        birdBottom -= gravity;
+        bird.style.bottom = birdBottom + 'px';
+        bird.style.left = birdLeft + 'px';
+    }
+    let gameTimerId = setInterval(startGame, 20)
 /*
 *Al llevar el eje de coordenadas al documento html hacemos una traducción
 *debido a que funcionan distinto y esa diferencia es más evidente cuando trabajamos en el top.
@@ -85,7 +97,8 @@ function movimiento(event){
 
 function caer(){
 
-
+    bird.style.animation='up 0.95s ease-in-out ';
+        bird.style.top='500px';
 	
 }
 
@@ -93,34 +106,93 @@ function caer(){
 function mantener(){
 
 }
-window.onkeyup = movimiento;
-window.onkeydown=mantener;
+window.onkeyup = caer;
+window.onkeydown=movimiento;
 
-function pierde(){
+// function pierde(){
  
-    // console.log(bird.getBoundingClientRect());
-    // console.log(topPipe.offsetLeft);
-    const tocaIzq = bird.offsetLeft >= topPipe.offsetLeft - bird.clientWidth;
+//     // console.log(bird.getBoundingClientRect());
+//     // console.log(topPipe.offsetLeft);
+//     const tocaIzq = bird.offsetLeft >= topPipe.offsetLeft - bird.clientWidth;
   
-    // const offsetRightPipe = (pipeline.offsetLeft + 2 * bird.clientWidth);
+//     // const offsetRightPipe = (pipeline.offsetLeft + 2 * bird.clientWidth);
 
-    // const behind = offsetRightPipe < bird.offsetLeft;
+//     // const behind = offsetRightPipe < bird.offsetLeft;
 
-    // const isColumnLine = tocaIzq && !behind;
+//     // const isColumnLine = tocaIzq && !behind;
 
-    // if (!isColumnLine) return false;
+//     // if (!isColumnLine) return false;
 
-    // const touchingTop = bird.offsetTop <= topPipe.offsetHeight;
+//     // const touchingTop = bird.offsetTop <= topPipe.offsetHeight;
 
-    // const touchingBotton = bird.offsetTop <= bottomPipe.offsetHeight;
-    // console.log("perdio");
-    // return (touchingTop || touchingBotton);
+//     // const touchingBotton = bird.offsetTop <= bottomPipe.offsetHeight;
+//     // console.log("perdio");
+//     // return (touchingTop || touchingBotton);
     
    
+// }
+
+// pierde();
+
+function generateObstacle() {
+    let obstacleLeft=900;
+    let bottomPipe = document.createElement('div');
+    let topPipe = document.createElement('div');
+    bottomPipe.classList.add('bottomPipe')
+    topPipe.classList.add('topPipe')
+    pipeline.appendChild(topPipe)
+    pipeline.appendChild(bottomPipe)
+    let widthBird=bird.getBoundingClientRect().width;
+    let heightBird=bird.getBoundingClientRect().height;
+    let birdX=bird.getBoundingClientRect().x+ widthBird;
+    let birdY=bird.getBoundingClientRect().y+ heightBird;
+    let bottomPipeX=bottomPipe.getBoundingClientRect().x;
+    let bottomPipeY=bottomPipe.getBoundingClientRect().y;
+    let topPipeX=topPipe.getBoundingClientRect().x;
+    let topPipeY=topPipe.getBoundingClientRect().y;
+    let bottomPipeWidth=bottomPipe.getBoundingClientRect().width;
+    let bottomPipeHeight=bottomPipe.getBoundingClientRect().height;
+    let topPipeWidth=bottomPipe.getBoundingClientRect().width;
+    let topPipeHeight=bottomPipe.getBoundingClientRect().height;
+    let birdYT=bird.getBoundingClientRect().y;
+    
+
+    function moveObstacle() {
+        obstacleLeft -=4
+        bottomPipe.style.left = obstacleLeft + 'px'
+        topPipe.style.left = obstacleLeft + 'px'
+
+        if (obstacleLeft ==70) {
+            clearInterval(timerId)
+            pipeline.removeChild(bottomPipe)
+            pipeline.removeChild(topPipe)
+        }
+        if ( ( birdX>=bottomPipeX && birdX<=bottomPipeX + bottomPipeWidth
+            && birdY>= bottomPipeY && birdY<=bottomPipeY+ bottomPipeHeight) ||(
+                birdX>=bottomPipeX && birdX<=bottomPipeX + bottomPipeWidth
+        && birdY>= bottomPipeY && birdY<=bottomPipeY+ bottomPipeHeight
+            )||birdY<-200
+            ) {
+                console.log("game over");
+             gameOver()
+            clearInterval(timerId)
+        }
+    }
+    let timerId = setInterval(moveObstacle, 20) 
+    
+     if (!isGameOver) setTimeout(generateObstacle, 2000)
+
 }
+generateObstacle()
 
-pierde();
-
+function gameOver() {
+    clearInterval(gameTimerId)
+    console.log('game over')
+    isGameOver = true
+    // document.removeEventListener('keyup', control)
+    // ground.classList.add('ground')
+    // ground.classList.remove('ground-moving')
+}
 
 // function setPipeSize() {
 //     const alturaDisponible = innerHeight - 150;
