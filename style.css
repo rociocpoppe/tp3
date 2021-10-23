@@ -27,11 +27,6 @@
     /* Posicionamos el personaje sobre el camino de madera */
     position:relative;
   
-    /* -webkit-transition-timing-function: ease-in-out;
-    -moz-transition-timing-function: ease-in-out;
-    -o-transition-timing-function: ease-in-out;
-    transition-timing-function: ease-in-out; */
-  
   }
   
   /* Animación de personaje caminando: Simplemente mueve el sprite sheet hacia la izquierda, realizando el movimiento. */
@@ -56,14 +51,24 @@
   
   }
 
+ // @keyframes down {
+ //   0% {top: 150px}
+ //   100% {top: 500px}
+ // }
+
+
+
 @keyframes progressBar {
   0% { width: var(--my-start-width); }
   100% { width: var(--my-end-width); }
 }
+
   @keyframes up {
-    0% {top: 150px;}
-    100% {top: 500px;}
+    0% {top: var(myVar0, 150px);}
+    100% {top: var(myVar100, -500px);}
   }
+
+
   /* Animación del mar. */
   #pipeline{
     /* background:url(p.png) no-repeat; */
