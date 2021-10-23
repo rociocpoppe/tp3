@@ -25,10 +25,6 @@
     /* Posicionamos el personaje sobre el camino de madera */
     position:relative;
     top:150px;
-    /* -webkit-transition-timing-function: ease-in-out;
-    -moz-transition-timing-function: ease-in-out;
-    -o-transition-timing-function: ease-in-out;
-    transition-timing-function: ease-in-out; */
   
   }
   
@@ -53,10 +49,17 @@
     position: relative;
   
   }
-  @keyframes up {
-    0% {top: 150px;}
-    100% {top: 500px;}
+  @keyframes down {
+    0% {top: 150px}
+    100% {top: 500px}
   }
+
+  @keyframes up {
+    0% {top: var(myVar0, 150px);}
+    100% {top: var(myVar100, -500px);}
+  }
+
+
   /* Animación del mar. */
   #pipeline{
     /* background:url(p.png) no-repeat; */
