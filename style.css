@@ -15,6 +15,8 @@
     border: solid black 3px;
     width:79px;
     height:71px;
+    left: 220px;
+    bottom: 100px;
     /* Cómo hay establecido un tamaño, centramos con margin:auto */
     margin:auto;  
     /* Cargamos el sprite (el repeat-x se puede omitir, por defecto se repite) */
@@ -24,7 +26,6 @@
     /* animation: fall .4s ease-in-out; */
     /* Posicionamos el personaje sobre el camino de madera */
     position:relative;
-    top:150px;
   
   }
   
@@ -49,10 +50,18 @@
     position: relative;
   
   }
-  @keyframes down {
-    0% {top: 150px}
-    100% {top: 500px}
-  }
+
+ // @keyframes down {
+ //   0% {top: 150px}
+ //   100% {top: 500px}
+ // }
+
+
+
+@keyframes progressBar {
+  0% { width: var(--my-start-width); }
+  100% { width: var(--my-end-width); }
+}
 
   @keyframes up {
     0% {top: var(myVar0, 150px);}
@@ -72,11 +81,31 @@
     
   }
 
-  #topPipe{
-    border: solid black 3px;
+  .obstacle {
+    background-image: url('p.png');
+    width: 100px;
+    height: 200px;
+    position: relative;
+    margin-right:600px;
+
+}
+
+.topObstacle {
+    background-image: url('p.png') repeat-x;
+    transform: rotate(180deg);
+    width: 100px;
+    height: 200px;
+    position: relative;
+    margin-right:600px;
+    background-size: cover; 
+}
+
+
+  .topPipe{
+    /* border: solid black 3px; */
     height: 200px;
     width: 100%;   
-    background:url("p.png") repeat-x;
+    background:url("p.png") ;
     transform: rotate(180deg);
     position: relative;
     margin-right:600px;
@@ -86,14 +115,14 @@
     background-size: cover; 
   }
 
-  #bottomPipe{
-    border: solid black 3px;
+  .bottomPipe{
+    /* border: solid black 3px; */
     height: 200px;
     width: 100%;
     margin-top: 100px; 
     margin-right:600px;
     position: relative;
-    background:url("p.png") repeat-x;
+    background:url("p.png") ;
     /* background-image: url("pipe.png"); */
     background-size: cover; 
   }
