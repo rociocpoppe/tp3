@@ -51,10 +51,10 @@
   
   }
 
- // @keyframes down {
+ /* // @keyframes down {
  //   0% {top: 150px}
  //   100% {top: 500px}
- // }
+ // } */
 
 
 
@@ -78,31 +78,13 @@
      margin-left:900px; 
     /* justify-content: space-between; */
     animation: pipe .50s linear .20s infinite;
+    display: flex;
+    flex-direction: row;
     
   }
 
-  .obstacle {
-    background-image: url('p.png');
-    width: 100px;
-    height: 200px;
-    position: relative;
-    margin-right:600px;
-
-}
-
-.topObstacle {
-    background-image: url('p.png') repeat-x;
-    transform: rotate(180deg);
-    width: 100px;
-    height: 200px;
-    position: relative;
-    margin-right:600px;
-    background-size: cover; 
-}
-
-
   .topPipe{
-    /* border: solid black 3px; */
+    border: solid black 3px;
     height: 200px;
     width: 100%;   
     background:url("p.png") ;
@@ -113,10 +95,12 @@
     /* margin: 200px; */
     /* animation: pipe .20s linear 10s infinite  ; */
     background-size: cover; 
+    /* display: flex;
+    flex-direction: row; */
   }
 
   .bottomPipe{
-    /* border: solid black 3px; */
+    border: solid black 3px;
     height: 200px;
     width: 100%;
     margin-top: 100px; 
@@ -125,6 +109,8 @@
     background:url("p.png") ;
     /* background-image: url("pipe.png"); */
     background-size: cover; 
+    /* display: flex;
+    flex-direction: row; */
   }
   
   /* Animación para mover cielo y mar */

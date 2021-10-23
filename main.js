@@ -57,13 +57,13 @@ function movimiento(event) {
 
    
 
-    if (event.keyCode == '38') {//arriba
-        let birdAux = birdYT-200;
-        element.style.setProperty("myVar0", birdYT);
-        element.style.setProperty("myVar100", birdAux);
-        bird.style.animation = 'up 0.95s ease-in-out'; //ease-out-quart
-        bird.style.top = 500+'px';
-    }
+    // if (event.keyCode == '38') {//arriba
+    //     let birdAux = birdYT-200;
+    //     element.style.setProperty("myVar0", birdYT);
+    //     element.style.setProperty("myVar100", birdAux);
+    //     bird.style.animation = 'up 0.95s ease-in-out'; //ease-out-quart
+    //     bird.style.top = 500+'px';
+    // }
 
 
 
@@ -158,19 +158,7 @@ function generateObstacle() {
     topPipe.classList.add('topPipe')
     pipeline.appendChild(topPipe)
     pipeline.appendChild(bottomPipe)
-    let widthBird=bird.getBoundingClientRect().width;
-    let heightBird=bird.getBoundingClientRect().height;
-    let birdX=bird.getBoundingClientRect().x+ widthBird;
-    let birdY=bird.getBoundingClientRect().y+ heightBird;
-    let bottomPipeX=bottomPipe.getBoundingClientRect().x;
-    let bottomPipeY=bottomPipe.getBoundingClientRect().y;
-    let topPipeX=topPipe.getBoundingClientRect().x;
-    let topPipeY=topPipe.getBoundingClientRect().y;
-    let bottomPipeWidth=bottomPipe.getBoundingClientRect().width;
-    let bottomPipeHeight=bottomPipe.getBoundingClientRect().height;
-    let topPipeWidth=bottomPipe.getBoundingClientRect().width;
-    let topPipeHeight=bottomPipe.getBoundingClientRect().height;
-    let birdYT=bird.getBoundingClientRect().y;
+
     
 
     function moveObstacle() {
@@ -183,11 +171,8 @@ function generateObstacle() {
             pipeline.removeChild(bottomPipe)
             pipeline.removeChild(topPipe)
         }
-        if ( ( birdX>=bottomPipeX && birdX<=bottomPipeX + bottomPipeWidth
-            && birdY>= bottomPipeY && birdY<=bottomPipeY+ bottomPipeHeight) ||(
-                birdX>=bottomPipeX && birdX<=bottomPipeX + bottomPipeWidth
-        && birdY>= bottomPipeY && birdY<=bottomPipeY+ bottomPipeHeight
-            )||birdY<-200
+        if (
+         birdBottom<-500
             ) {
                 console.log("game over");
              gameOver()
