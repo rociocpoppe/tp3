@@ -122,18 +122,14 @@ document.addEventListener('keyup', moveBird)
 
 function generateObstacle() {
     let obstacleLeft=900;
-    let obstacleBottom=500;
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
+    if (!isGameOver) {
     bottomPipe.classList.add('bottomPipe')
     topPipe.classList.add('topPipe')
+    }
     pipeline.appendChild(topPipe)
     pipeline.appendChild(bottomPipe)
-    // bottomPipe.style.right = 400+ 'px'
-    // topPipe.style.right = 400+ 'px'
-
-   
-    
 
     function moveObstacle() {
         obstacleLeft -=4
@@ -154,7 +150,7 @@ function generateObstacle() {
     }
      let timerId = setInterval(moveObstacle, 20) 
     
-    //  if (!isGameOver) setTimeout(generateObstacle, 2000)
+     if (!isGameOver) setTimeout(generateObstacle, 3000)
 
     //     if (
     //         obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 &&

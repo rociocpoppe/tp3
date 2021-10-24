@@ -86,7 +86,7 @@
   .topPipe{
     border: solid black 3px;
     height: 200px;
-    width: 100%;   
+    width: 100px;   
     background:url("p.png") ;
     transform: rotate(180deg);
     position: relative;
@@ -96,7 +96,7 @@
   .bottomPipe{
     border: solid black 3px;
     height: 200px;
-    width: 100%;
+    width: 100px;
     margin-top: 300px; 
 
     position: relative;
