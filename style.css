@@ -90,27 +90,18 @@
     background:url("p.png") ;
     transform: rotate(180deg);
     position: relative;
-    margin-right:600px;
-    /* margin-top: 30px; */
-    /* margin: 200px; */
-    /* animation: pipe .20s linear 10s infinite  ; */
-    background-size: cover; 
-    /* display: flex;
-    flex-direction: row; */
+
   }
 
   .bottomPipe{
     border: solid black 3px;
     height: 200px;
     width: 100%;
-    margin-top: 100px; 
-    margin-right:600px;
+    margin-top: 300px; 
+
     position: relative;
     background:url("p.png") ;
-    /* background-image: url("pipe.png"); */
-    background-size: cover; 
-    /* display: flex;
-    flex-direction: row; */
+  
   }
   
   /* Animación para mover cielo y mar */

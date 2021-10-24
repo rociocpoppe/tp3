@@ -28,161 +28,140 @@ let isGameOver=false;
 *para empujar hacias arriba.
 */
 // console.log(bottomPipe.getBoundingClientRect());
-function movimiento(event) {
-    let widthBird = bird.getBoundingClientRect().width;
-    let heightBird = bird.getBoundingClientRect().height;
-    let birdX = bird.getBoundingClientRect().x + widthBird;
-    let birdY = bird.getBoundingClientRect().y + heightBird;
-    let bottomPipeX = bottomPipe.getBoundingClientRect().x;
-    let bottomPipeY = bottomPipe.getBoundingClientRect().y;
-    let topPipeX = topPipe.getBoundingClientRect().x;
-    let topPipeY = topPipe.getBoundingClientRect().y;
-    let bottomPipeWidth = bottomPipe.getBoundingClientRect().width;
-    let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
-    let topPipeWidth = bottomPipe.getBoundingClientRect().width;
-    let topPipeHeight = bottomPipe.getBoundingClientRect().height;
-    let birdYT = bird.getBoundingClientRect().y;
-    //  }
-    // if (event.keyCode == '39') {//derecha
+// function movimiento(event) {
+//     let widthBird = bird.getBoundingClientRect().width;
+//     let heightBird = bird.getBoundingClientRect().height;
+//     let birdX = bird.getBoundingClientRect().x + widthBird;
+//     let birdY = bird.getBoundingClientRect().y + heightBird;
+//     let bottomPipeX = bottomPipe.getBoundingClientRect().x;
+//     let bottomPipeY = bottomPipe.getBoundingClientRect().y;
+//     let topPipeX = topPipe.getBoundingClientRect().x;
+//     let topPipeY = topPipe.getBoundingClientRect().y;
+//     let bottomPipeWidth = bottomPipe.getBoundingClientRect().width;
+//     let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
+//     let topPipeWidth = bottomPipe.getBoundingClientRect().width;
+//     let topPipeHeight = bottomPipe.getBoundingClientRect().height;
+//     let birdYT = bird.getBoundingClientRect().y;
+//     //  }
+//     // if (event.keyCode == '39') {//derecha
 
 
-    //     x = x + 10;
-    //     bird.style.left = x + 'px';
-    // }
+//     //     x = x + 10;
+//     //     bird.style.left = x + 'px';
+//     // }
 
-    // if (event.keyCode == '37') {//Izquierda
-    //     x = x - 10;
-    //     bird.style.left = x + 'px';
-    // }
+//     // if (event.keyCode == '37') {//Izquierda
+//     //     x = x - 10;
+//     //     bird.style.left = x + 'px';
+//     // }
 
    
 
-    // if (event.keyCode == '38') {//arriba
-    //     let birdAux = birdYT-200;
-    //     element.style.setProperty("myVar0", birdYT);
-    //     element.style.setProperty("myVar100", birdAux);
-    //     bird.style.animation = 'up 0.95s ease-in-out'; //ease-out-quart
-    //     bird.style.top = 500+'px';
-    // }
+//     // if (event.keyCode == '38') {//arriba
+//     //     let birdAux = birdYT-200;
+//     //     element.style.setProperty("myVar0", birdYT);
+//     //     element.style.setProperty("myVar100", birdAux);
+//     //     bird.style.animation = 'up 0.95s ease-in-out'; //ease-out-quart
+//     //     bird.style.top = 500+'px';
+//     // }
 
 
 
      
 
 
-    if (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth
-        && birdYT >= topPipeY && birdYT <= topPipeY + topPipeHeight) {
+//     if (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth
+//         && birdYT >= topPipeY && birdYT <= topPipeY + topPipeHeight) {
 
 
-        bird.style.animation = 'up 0.95s ease-in-out ';
-        bird.style.top = '500px';
+//         bird.style.animation = 'up 0.95s ease-in-out ';
+//         bird.style.top = '500px';
 
-        // caer();
+//         // caer();
 
-    }
+//     }
 
-    //chequeada
-    if (birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
-        && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight) {
-        console.log("cae");
-    }
+//     //chequeada
+//     if (birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
+//         && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight) {
+//         console.log("cae");
+//     }
 
-    // if (event.keyCode == '40') {//abajo
-    //     y = y - 10;
-    //     bird.style.top = (-y) + 'px';
-    // }
+//     // if (event.keyCode == '40') {//abajo
+//     //     y = y - 10;
+//     //     bird.style.top = (-y) + 'px';
+//     // }
 
 	
-}
+// }
 
 
-function caer() {
+// function caer() {
 
-    bird.style.animation = 'down 1.1s ease-in-out ';
-    bird.style.top = '500px';
-
-}
-
-
-
-// function mantener() {
+//     bird.style.animation = 'down 1.1s ease-in-out ';
+//     bird.style.top = '500px';
 
 // }
 
-window.onkeyup = caer;
-window.onkeydown = movimiento;
-
-function pierde() {
-
-    // console.log(bird.getBoundingClientRect());
-    // console.log(topPipe.offsetLeft);
-    const tocaIzq = bird.offsetLeft >= topPipe.offsetLeft - bird.clientWidth;
-
-    // const offsetRightPipe = (pipeline.offsetLeft + 2 * bird.clientWidth);
-window.onkeyup = caer;
-window.onkeydown=movimiento;
-
-// function pierde(){
- 
-//     // console.log(bird.getBoundingClientRect());
-//     // console.log(topPipe.offsetLeft);
-//     const tocaIzq = bird.offsetLeft >= topPipe.offsetLeft - bird.clientWidth;
-  
-//     // const offsetRightPipe = (pipeline.offsetLeft + 2 * bird.clientWidth);
-
-//     // const behind = offsetRightPipe < bird.offsetLeft;
-
-//     // const isColumnLine = tocaIzq && !behind;
-
-//     // if (!isColumnLine) return false;
-
-//     // const touchingTop = bird.offsetTop <= topPipe.offsetHeight;
 
 
 
+function moveBird(e) {
+    if (e.keyCode === 32) {
+        jump()
+    }
 }
-//     // const touchingBotton = bird.offsetTop <= bottomPipe.offsetHeight;
-//     // console.log("perdio");
-//     // return (touchingTop || touchingBotton);
-    
-   
-// }
 
-// pierde();
+function jump() {
+    if (birdBottom < 500) birdBottom += 50
+    bird.style.bottom = birdBottom + 'px'
+    console.log(birdBottom)
+}
+document.addEventListener('keyup', moveBird)
+
 
 function generateObstacle() {
     let obstacleLeft=900;
+    let obstacleBottom=500;
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
     bottomPipe.classList.add('bottomPipe')
     topPipe.classList.add('topPipe')
     pipeline.appendChild(topPipe)
     pipeline.appendChild(bottomPipe)
+    // bottomPipe.style.right = 400+ 'px'
+    // topPipe.style.right = 400+ 'px'
 
+   
     
 
     function moveObstacle() {
         obstacleLeft -=4
         bottomPipe.style.left = obstacleLeft + 'px'
         topPipe.style.left = obstacleLeft + 'px'
-
-        if (obstacleLeft ==70) {
+        
+        console.log(topPipe.getBoundingClientRect().width);
+        if (obstacleLeft ==-70) {
             clearInterval(timerId)
             pipeline.removeChild(bottomPipe)
             pipeline.removeChild(topPipe)
         }
-        if (
-         birdBottom<-500
-            ) {
+        if (birdBottom==-500 ) {
                 console.log("game over");
              gameOver()
             clearInterval(timerId)
         }
     }
-    let timerId = setInterval(moveObstacle, 20) 
+     let timerId = setInterval(moveObstacle, 20) 
     
-     if (!isGameOver) setTimeout(generateObstacle, 2000)
+    //  if (!isGameOver) setTimeout(generateObstacle, 2000)
 
+    //     if (
+    //         obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 &&
+    //         (birdBottom < obstacleBottom + 153 || birdBottom > obstacleBottom + gap -200)||
+    //         birdBottom === 0 
+    //         ) {
+    //       
 }
 generateObstacle()
 
