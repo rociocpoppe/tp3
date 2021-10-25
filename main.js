@@ -135,6 +135,20 @@ function generateObstacle() {
         obstacleLeft -=4
         bottomPipe.style.left = obstacleLeft + 'px'
         topPipe.style.left = obstacleLeft + 'px'
+        let widthBird = bird.getBoundingClientRect().width;
+    let heightBird = bird.getBoundingClientRect().height;
+    console.log("bird height" +heightBird);
+    let birdX = bird.getBoundingClientRect().x + widthBird;
+    let birdY = bird.getBoundingClientRect().y + heightBird;
+    let bottomPipeX = bottomPipe.getBoundingClientRect().x;
+    let bottomPipeY = bottomPipe.getBoundingClientRect().y;
+    let topPipeX = topPipe.getBoundingClientRect().x;
+    let topPipeY = topPipe.getBoundingClientRect().y;
+    let bottomPipeWidth = bottomPipe.getBoundingClientRect().width;
+    let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
+    let topPipeWidth = bottomPipe.getBoundingClientRect().width;
+    let topPipeHeight = bottomPipe.getBoundingClientRect().height;
+    let birdYT = bird.getBoundingClientRect().y;
         
         console.log(topPipe.getBoundingClientRect().width);
         if (obstacleLeft ==-70) {
@@ -142,9 +156,12 @@ function generateObstacle() {
             pipeline.removeChild(bottomPipe)
             pipeline.removeChild(topPipe)
         }
-        if (birdBottom==-500 ) {
+        if (birdBottom==-500 || (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth
+                    && birdYT >= topPipeY && birdYT <= topPipeY + topPipeHeight)||
+                   ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
+                     && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
                 console.log("game over");
-             gameOver()
+             gameOver();
             clearInterval(timerId)
         }
     }
@@ -165,9 +182,7 @@ function gameOver() {
     clearInterval(gameTimerId)
     console.log('game over')
     isGameOver = true
-    // document.removeEventListener('keyup', control)
-    // ground.classList.add('ground')
-    // ground.classList.remove('ground-moving')
+    document.removeEventListener('keyup', moveBird)
 }
 
 // function setPipeSize() {
