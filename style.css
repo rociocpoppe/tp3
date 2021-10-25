@@ -12,7 +12,7 @@
   /* Animación del personaje */
   #bird {
     /* Tamaño de la viñeta individual */
-    border: solid black 3px;
+    /* border: solid black 3px; */
     width:79px;
     height:71px;
     left: 220px;
@@ -71,12 +71,12 @@
 
   /* Animación del mar. */
   #pipeline{
+    /* border: solid black 3px; */
     /* background:url(p.png) no-repeat; */
     /* height:100%; */
-    /* width:100px; */
+    width:100%;
      position: absolute; 
-     margin-left:900px; 
-    /* justify-content: space-between; */
+     /* margin-left:900px;  */
     animation: pipe .50s linear .20s infinite;
     display: flex;
     flex-direction: row;
@@ -84,23 +84,23 @@
   }
 
   .topPipe{
-    border: solid black 3px;
-    /* height: 200px; */
+    /* border: solid black 3px; */
+    /* height: 200px;  */
     /* width: 100px;    */
-    background:url("p.png") ;
+    background:url("pipes.png") ;
     transform: rotate(180deg);
     position: relative;
 
   }
 
   .bottomPipe{
-    border: solid black 3px;
+    /* border: solid black 3px; */
     /* height: 200px; */
     /* width: 100px; */
-    margin-top: 300px; 
+    /* margin-top: 300px;  */
 
     position: relative;
-    background:url("p.png") ;
+    background:url("pipes.png") ;
   
   }
   

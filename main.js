@@ -115,7 +115,6 @@ function moveBird(e) {
 function jump() {
     if (birdBottom < 500) birdBottom += 50
     bird.style.bottom = birdBottom + 'px'
-    console.log(birdBottom)
 }
 document.addEventListener('keyup', moveBird)
 
@@ -125,24 +124,24 @@ function generateObstacle() {
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
     if (!isGameOver) {
-        bottomPipe.classList.add('bottomPipe')
-        topPipe.classList.add('topPipe')
+        bottomPipe.classList.add('bottomPipe');
+        topPipe.classList.add('topPipe');
     }
-    let height = Math.floor(Math.random() * (200));
+    let height = Math.floor(Math.random() * (170));
     bottomPipe.style.height = `${height}px`;
     topPipe.style.height = `${height}px`;
     let marginBottomPipe=500-height;
-    bottomPipe.style.width='100px';
     bottomPipe.style.marginTop=`${marginBottomPipe}px`;
-    topPipe.style.width='100px';
-    pipeline.appendChild(topPipe)
-    pipeline.appendChild(bottomPipe)
+    pipeline.appendChild(topPipe);
+    pipeline.appendChild(bottomPipe);
+    bottomPipe.style.width='60px';  
+    topPipe.style.width='60px';
 
-
+    let timerId = setInterval(moveObstacle, 20);
     function moveObstacle() {
-        obstacleLeft -=4
-        bottomPipe.style.left = obstacleLeft + 'px'
-        topPipe.style.left = obstacleLeft + 'px'
+        obstacleLeft -=2;
+        bottomPipe.style.left = obstacleLeft + 'px';
+        topPipe.style.left = obstacleLeft + 'px';
         let widthBird = bird.getBoundingClientRect().width;
         let heightBird = bird.getBoundingClientRect().height;
         let birdX = bird.getBoundingClientRect().x + widthBird;
@@ -156,10 +155,11 @@ function generateObstacle() {
         let topPipeWidth = bottomPipe.getBoundingClientRect().width;
         let topPipeHeight = bottomPipe.getBoundingClientRect().height;
         let birdYT = bird.getBoundingClientRect().y;
-        if (obstacleLeft ==-70) {
-            clearInterval(timerId)
-            pipeline.removeChild(bottomPipe)
-            pipeline.removeChild(topPipe)
+        if (obstacleLeft ===100) {
+            console.log("entra");
+            clearInterval(timerId);
+            pipeline.removeChild(bottomPipe);
+            pipeline.removeChild(topPipe);
         }
         if (birdBottom==-500 || (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth
                     && birdYT >= topPipeY && birdYT <= topPipeY + topPipeHeight)||
@@ -167,28 +167,26 @@ function generateObstacle() {
                      && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
                 console.log("game over");
              gameOver();
-            clearInterval(timerId)
+            clearInterval(timerId);
         }
     }
-     let timerId = setInterval(moveObstacle, 20) 
-    
-     if (!isGameOver) setTimeout(generateObstacle, 3000)   
-}
-generateObstacle()
+    // let timerId = setInterval(moveObstacle, 20);
+   
+    if (!isGameOver){
+        setTimeout(generateObstacle, 3000);
+    } 
+  
+     
+ 
+} 
+generateObstacle();
 
 function gameOver() {
-    clearInterval(gameTimerId)
-    console.log('game over')
-    isGameOver = true
-    document.removeEventListener('keyup', moveBird)
+    clearInterval(gameTimerId);
+    console.log('game over');
+    isGameOver = true;
+    document.removeEventListener('keyup', moveBird);
 }
 
-// function setPipeSize() {
-//     const alturaDisponible = innerHeight - 150;
-//     console.log(alturaDisponible);
-//     const bottomHeight = Math.floor(Math.random() * (alturaDisponible + 1));
-//     bottomPipe.style.height = `${bottomHeight}px`;
-//     const upperHeight = alturaDisponible - bottomHeight;
-//     topPipe.style.height = `${upperHeight}px`;
-// }
+
 
