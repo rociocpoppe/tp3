@@ -125,32 +125,37 @@ function generateObstacle() {
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
     if (!isGameOver) {
-    bottomPipe.classList.add('bottomPipe')
-    topPipe.classList.add('topPipe')
+        bottomPipe.classList.add('bottomPipe')
+        topPipe.classList.add('topPipe')
     }
+    let height = Math.floor(Math.random() * (200));
+    bottomPipe.style.height = `${height}px`;
+    topPipe.style.height = `${height}px`;
+    let marginBottomPipe=500-height;
+    bottomPipe.style.width='100px';
+    bottomPipe.style.marginTop=`${marginBottomPipe}px`;
+    topPipe.style.width='100px';
     pipeline.appendChild(topPipe)
     pipeline.appendChild(bottomPipe)
+
 
     function moveObstacle() {
         obstacleLeft -=4
         bottomPipe.style.left = obstacleLeft + 'px'
         topPipe.style.left = obstacleLeft + 'px'
         let widthBird = bird.getBoundingClientRect().width;
-    let heightBird = bird.getBoundingClientRect().height;
-    console.log("bird height" +heightBird);
-    let birdX = bird.getBoundingClientRect().x + widthBird;
-    let birdY = bird.getBoundingClientRect().y + heightBird;
-    let bottomPipeX = bottomPipe.getBoundingClientRect().x;
-    let bottomPipeY = bottomPipe.getBoundingClientRect().y;
-    let topPipeX = topPipe.getBoundingClientRect().x;
-    let topPipeY = topPipe.getBoundingClientRect().y;
-    let bottomPipeWidth = bottomPipe.getBoundingClientRect().width;
-    let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
-    let topPipeWidth = bottomPipe.getBoundingClientRect().width;
-    let topPipeHeight = bottomPipe.getBoundingClientRect().height;
-    let birdYT = bird.getBoundingClientRect().y;
-        
-        console.log(topPipe.getBoundingClientRect().width);
+        let heightBird = bird.getBoundingClientRect().height;
+        let birdX = bird.getBoundingClientRect().x + widthBird;
+        let birdY = bird.getBoundingClientRect().y + heightBird;
+        let bottomPipeX = bottomPipe.getBoundingClientRect().x;
+        let bottomPipeY = bottomPipe.getBoundingClientRect().y;
+        let topPipeX = topPipe.getBoundingClientRect().x;
+        let topPipeY = topPipe.getBoundingClientRect().y;
+        let bottomPipeWidth = bottomPipe.getBoundingClientRect().width;
+        let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
+        let topPipeWidth = bottomPipe.getBoundingClientRect().width;
+        let topPipeHeight = bottomPipe.getBoundingClientRect().height;
+        let birdYT = bird.getBoundingClientRect().y;
         if (obstacleLeft ==-70) {
             clearInterval(timerId)
             pipeline.removeChild(bottomPipe)
@@ -167,14 +172,7 @@ function generateObstacle() {
     }
      let timerId = setInterval(moveObstacle, 20) 
     
-     if (!isGameOver) setTimeout(generateObstacle, 3000)
-
-    //     if (
-    //         obstacleLeft > 200 && obstacleLeft < 280 && birdLeft === 220 &&
-    //         (birdBottom < obstacleBottom + 153 || birdBottom > obstacleBottom + gap -200)||
-    //         birdBottom === 0 
-    //         ) {
-    //       
+     if (!isGameOver) setTimeout(generateObstacle, 3000)   
 }
 generateObstacle()
 
@@ -194,23 +192,3 @@ function gameOver() {
 //     topPipe.style.height = `${upperHeight}px`;
 // }
 
-// //no sirve habria que hacer un for que recorra el ancho y que vaya aumentando el margen 
-// function setPipePosition(){
-//     for(let i=200; i<=700; i+=200){
-//        bottomPipe.style.marginLeft= `${i}px`;
-//        topPipe.style.marginLeft= `${i}px`;
-
-//     }
-        // bottomPipe.style.marginLeft= `${index}px`;
-        // topPipe.style.marginLeft= `${i}px`;
-    // const anchoDisponible=700;
-    // const pos = Math.floor(Math.random() * (anchoDisponible + 1));
-    // bottomPipe.style.marginLeft= `${pos}px`;
-    // topPipe.style.marginLeft= `${pos}px`;
-// }
-
-// pipeline.addEventListener("animationiteration", () => {
-//     setPipeSize();
-//    // setPipePosition();
-//     // bottomPipe.style.marginLeft=`30px`;
-// });
