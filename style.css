@@ -37,10 +37,10 @@
     100% { background-position:-325px }
   }
   
-  @keyframes fall{
+  /* @keyframes fall{
     0% {background-position: 100px}
     100% {background-position: 700px}
-  }
+  } */
   /* Animación del cielo. Efecto "Parallax", va más lento que el mar. */
   #city {
     background:url(fondo1.png) repeat-X;
@@ -57,11 +57,11 @@
  // } */
 
 
-
+/* 
 @keyframes progressBar {
   0% { width: var(--my-start-width); }
   100% { width: var(--my-end-width); }
-}
+} */
 
   @keyframes up {
     0% {top: var(myVar0, 150px);}

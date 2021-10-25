@@ -123,7 +123,8 @@ function generateObstacle() {
     let obstacleLeft=900;
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
-    if (!isGameOver) {
+    if (isGameOver==false) {
+        console.log("gameover " +isGameOver);
         bottomPipe.classList.add('bottomPipe');
         topPipe.classList.add('topPipe');
     }
@@ -164,10 +165,8 @@ function generateObstacle() {
                     && birdYT >= topPipeY && birdYT <= topPipeY + topPipeHeight)||
                    ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
                      && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
-                console.log("game over");
-             
-            clearInterval(timerId);
             gameOver();
+            clearInterval(timerId); 
         }
     }
    
@@ -185,8 +184,31 @@ function gameOver() {
     console.log('game over');
     isGameOver = true;
     document.removeEventListener('keyup', moveBird);
-
+    clearInterval(temp);
+    
 }
+let seconds = 59;
+let minutes = 1;
+let  temp = setInterval(timeLimit, 1000);
+let chain;
+let time = true;
+function timeLimit() {
+    if (seconds < 10) {
+        chain = minutes + ":0" + seconds;
+    } else {
+        chain = minutes + ":" + seconds;
+    }
+    document.getElementById("text").innerHTML = chain;
 
+    if (minutes == 0 && seconds == 0) {
+        time = false;
+        document.getElementById("text").innerHTML = "Se acabo el tiempo";
+        clearInterval(temp);
+    } else if (seconds == 0) {
+        minutes--;
+        seconds = 60;
+    }
+    seconds--;
+}
 
 
