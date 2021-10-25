@@ -156,7 +156,6 @@ function generateObstacle() {
         let topPipeHeight = bottomPipe.getBoundingClientRect().height;
         let birdYT = bird.getBoundingClientRect().y;
         if (obstacleLeft ===100) {
-            console.log("entra");
             clearInterval(timerId);
             pipeline.removeChild(bottomPipe);
             pipeline.removeChild(topPipe);
@@ -166,11 +165,11 @@ function generateObstacle() {
                    ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
                      && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
                 console.log("game over");
-             gameOver();
+             
             clearInterval(timerId);
+            gameOver();
         }
     }
-    // let timerId = setInterval(moveObstacle, 20);
    
     if (!isGameOver){
         setTimeout(generateObstacle, 3000);
@@ -186,6 +185,7 @@ function gameOver() {
     console.log('game over');
     isGameOver = true;
     document.removeEventListener('keyup', moveBird);
+
 }
 
 
