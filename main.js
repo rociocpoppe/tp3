@@ -6,11 +6,13 @@ const pipeline = document.getElementById("pipeline")
 const topPipe = document.getElementById("topPipe")
 const bottomPipe = document.getElementById("bottomPipe");
 const container=document.getElementById("gameContainer");
+
 let birdLeft = 10;
 let birdBottom = 100;
 let gravity = 3;
 let gap = 50;
 let isGameOver=false;
+
 
 
 
@@ -117,10 +119,12 @@ function jump() {
     bird.style.bottom = birdBottom + 'px'
 }
 document.addEventListener('keyup', moveBird)
-
+let debug = "";
 
 function generateObstacle() {
-    let obstacleLeft=900;
+
+    console.log(debug);
+    let obstacleLeft=container.getBoundingClientRect().width;;
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
     if (isGameOver==false) {
@@ -128,10 +132,19 @@ function generateObstacle() {
         bottomPipe.classList.add('bottomPipe');
         topPipe.classList.add('topPipe');
     }
-    let height = Math.floor(Math.random() * (170));
-    bottomPipe.style.height = `${height}px`;
-    topPipe.style.height = `${height}px`;
-    let marginBottomPipe=500-height;
+    let heightTpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height/2 - 100)-50) + 50);//170
+
+    let heightBpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height - heightTpipe - 75)-50) + 50);//170
+ 
+    topPipe.style.height = `${heightTpipe}px`;  
+    if(heightBpipe <= 300){
+        bottomPipe.style.height = `${heightBpipe}px`;
+    }else{
+        heightBpipe = 299;
+        bottomPipe.style.height = `${heightBpipe}px`;
+    }
+    
+    let marginBottomPipe=container.getBoundingClientRect().height-heightBpipe;
     bottomPipe.style.marginTop=`${marginBottomPipe}px`;
     pipeline.appendChild(topPipe);
     pipeline.appendChild(bottomPipe);
@@ -153,28 +166,56 @@ function generateObstacle() {
         let topPipeY = topPipe.getBoundingClientRect().y;
         let bottomPipeWidth = bottomPipe.getBoundingClientRect().width;
         let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
-        let topPipeWidth = bottomPipe.getBoundingClientRect().width;
-        let topPipeHeight = bottomPipe.getBoundingClientRect().height;
+        let topPipeWidth = topPipe.getBoundingClientRect().width;
+        let topPipeHeight = topPipe.getBoundingClientRect().height;
         let birdYT = bird.getBoundingClientRect().y;
-        if (obstacleLeft ===100) {
+        
+        if (obstacleLeft < -130 ) {
+
             clearInterval(timerId);
             pipeline.removeChild(bottomPipe);
             pipeline.removeChild(topPipe);
         }
-        if (birdBottom==-500 || (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth
-                    && birdYT >= topPipeY && birdYT <= topPipeY + topPipeHeight)||
-                   ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
-                     && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
+
+        if (birdBottom<container.getBoundingClientRect().height*(-1)+heightBird || 
+
+            (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth 
+                /*&& birdYT >= topPipeY*/ && birdYT <= topPipeY + topPipeHeight)||
+
+            ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
+                && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
+                    
+                    // console.log("DATOS DEL TUBO DE ARRIBA");
+                    // console.log(topPipeX);
+                    // console.log(topPipeY);
+                    // console.log(topPipeWidth);
+                    // console.log(topPipeHeight);
+
+                    // console.log("DATOS DEL PAJARO");
+                    // console.log(birdX);
+                    // console.log(birdYT);
+                    // console.log(birdY);
+                    // console.log(widthBird);
+                    // console.log(heightBird);
+                    // console.log(bird.getBoundingClientRect().x);
+                    
+                    // console.log("DATOS DEL TUBO DE ABAJO");
+                    // console.log(bottomPipeX);
+                    // console.log(bottomPipeY);
+                    // console.log(bottomPipeWidth);
+                    // console.log(bottomPipeHeight);
+            debug = "CORTO";
             gameOver();
             clearInterval(timerId); 
         }
     }
-   
+
     if (!isGameOver){
-        setTimeout(generateObstacle, 3000);
+        let random = Math.floor(Math.random() * (4000 - 500) + 500)
+        setTimeout(generateObstacle,random );//3000
     } 
   
-     
+ 
  
 } 
 generateObstacle();
@@ -189,9 +230,10 @@ function gameOver() {
 }
 let seconds = 59;
 let minutes = 1;
-let  temp = setInterval(timeLimit, 1000);
+let temp = setInterval(timeLimit, 1000);
 let chain;
 let time = true;
+
 function timeLimit() {
     if (seconds < 10) {
         chain = minutes + ":0" + seconds;
