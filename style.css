@@ -43,7 +43,7 @@
   } */
   /* Animación del cielo. Efecto "Parallax", va más lento que el mar. */
   #city {
-    background:url(fondo1.png) repeat-X;
+    background:url(back.png) repeat-X;
     height: 600px;
     
     animation: movebg 9s linear infinite;
@@ -75,7 +75,7 @@
     /* background:url(p.png) no-repeat; */
     /* height:100%; */
     width:100%;
-     position: absolute; 
+    position: absolute; 
      /* margin-left:900px;  */
     animation: pipe .50s linear .20s infinite;
     display: flex;
@@ -84,7 +84,7 @@
   }
 
   .topPipe{
-    /* border: solid black 3px; */
+    border: solid black 3px;
     /* height: 200px;  */
     /* width: 100px;    */
     background:url("pipes.png") ;
@@ -94,7 +94,7 @@
   }
 
   .bottomPipe{
-    /* border: solid black 3px; */
+    border: solid black 3px;
     /* height: 200px; */
     /* width: 100px; */
     /* margin-top: 300px;  */
