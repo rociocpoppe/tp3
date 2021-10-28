@@ -11,7 +11,7 @@ let birdBottom = 100;
 let gravity = 3;
 let gap = 50;
 let isGameOver=false;
-
+let points=0;
 
 
 
@@ -37,23 +37,33 @@ function jump() {
 document.addEventListener('keyup', moveBird)
 let debug = "";
 
+// function generateCoin(){
+//     let coin=document.createElement('div');
+//     if (isGameOver==false) {
+//         coin.classList.add('coin');
+//     }
+//     let coinPosition= Math.floor(Math.random() * ((pipeline.getBoundingClientRect().height /2)));
+//     console.log("coin pos" + coinPosition);
+//     pipeline.appendChild(coin);
+//     coin.style.top= `${coinPosition}px`;
+//     return coin;
+// }
 function generateObstacle() {
-
     let obstacleLeft=1100//--> se empiezan a dibujar afuera por esto ->container.getBoundingClientRect().width;
-    console.log(obstacleLeft);
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
-    let coin=document.createElement('div');
+    
+     let coin=document.createElement('div');
     if (isGameOver==false) {
         console.log("gameover " +isGameOver);
         bottomPipe.classList.add('bottomPipe');
         topPipe.classList.add('topPipe');
-        coin.classList.add('coin');
+         coin.classList.add('coin');
     }
     let heightTpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height/2 - 100)-50) + 50);//170
-
     let heightBpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height - heightTpipe - 75)-50) + 50);//170
- 
+    let coinPosition= Math.floor(Math.random() * ((pipeline.getBoundingClientRect().height /2)));
+     console.log("coin pos" + coinPosition);
     topPipe.style.height = `${heightTpipe}px`;  
     if(heightBpipe <= 300){
         bottomPipe.style.height = `${heightBpipe}px`;
@@ -68,7 +78,7 @@ function generateObstacle() {
     pipeline.appendChild(coin);
     bottomPipe.style.width='60px';  
     topPipe.style.width='60px';
-    coin.style.top='200px';
+     coin.style.top= `${coinPosition}px`;
     let timerId = setInterval(moveObstacle, 20);
     function moveObstacle() {
         obstacleLeft -=2;
@@ -87,13 +97,15 @@ function generateObstacle() {
         let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
         let topPipeWidth = topPipe.getBoundingClientRect().width;
         let topPipeHeight = topPipe.getBoundingClientRect().height;
+        let coinY=coin.getBoundingClientRect().y;
+        let coinX=coin.getBoundingClientRect().x;
+        let coinHeight=coin.getBoundingClientRect().height;
+        let coinWidth=coin.getBoundingClientRect().width;
         let birdYT = bird.getBoundingClientRect().y;
-        
         if (obstacleLeft === 100 ) {
-            //si pones <-130, las pipes desaparecen fuera de la pantalla, fijate que con esto desaparecen antes de 
-            //llegar al borde izquierdo
             console.log("entra");
             clearInterval(timerId);
+        
             pipeline.removeChild(bottomPipe);
             pipeline.removeChild(topPipe);
             pipeline.removeChild(coin);
@@ -107,38 +119,25 @@ function generateObstacle() {
             ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
                 && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
                     
-                    // console.log("DATOS DEL TUBO DE ARRIBA");
-                    // console.log(topPipeX);
-                    // console.log(topPipeY);
-                    // console.log(topPipeWidth);
-                    // console.log(topPipeHeight);
-
-                    // console.log("DATOS DEL PAJARO");
-                    // console.log(birdX);
-                    // console.log(birdYT);
-                    // console.log(birdY);
-                    // console.log(widthBird);
-                    // console.log(heightBird);
-                    // console.log(bird.getBoundingClientRect().x);
-                    
-                    // console.log("DATOS DEL TUBO DE ABAJO");
-                    // console.log(bottomPipeX);
-                    // console.log(bottomPipeY);
-                    // console.log(bottomPipeWidth);
-                    // console.log(bottomPipeHeight);
             debug = "CORTO";
             gameOver();
             clearInterval(timerId); 
+          
+        }
+        if(birdX>=coinX && birdX<= coinX+coinWidth && birdYT<=coinY+ coinHeight){
+            points++;
+            document.getElementById("points").innerHTML = `${points}`;
+            pipeline.removeChild(coin);
         }
     }
 
     if (!isGameOver){
         let random = Math.floor(Math.random() * (4000 - 500) + 500)
         setTimeout(generateObstacle,random );//3000
-    } 
-  
- 
- 
+        // let randomCoin = Math.floor(Math.random() * (10000) + 1000)
+        // console.log("random" + randomCoin);
+        // setInterval(generateCoin,randomCoin);
+    }  
 } 
 generateObstacle();
 
