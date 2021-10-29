@@ -25,7 +25,7 @@ html,body {
   /* Se carga el spritesheet */
   background:url(img/bird2.png) repeat-x;
   /* Se aplica la animación "fly": 0.4seg, 4 viñetas y se repite infinitamente */
-  /* animation:fly .4s steps(4) infinite; */
+  animation:fly .4s steps(4) infinite;
   /* Se posiciona el personaje sobre la ciudad */
   position:relative;
 
