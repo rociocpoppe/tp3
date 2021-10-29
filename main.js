@@ -5,23 +5,24 @@ const bird = document.getElementById('bird');
 const pipeline = document.getElementById("pipeline")
 const topPipe = document.getElementById("topPipe")
 const bottomPipe = document.getElementById("bottomPipe");
-const container=document.getElementById("gameContainer");
-const city=document.getElementById("city");
+const container = document.getElementById("gameContainer");
+const city = document.getElementById("city");
 let birdLeft = 10;
 let birdBottom = 100;
 let gravity = 3;
 let gap = 50;
-let isGameOver=false;
-let points=0;
+let isGameOver = false;
+let points = 0;
+let contObtaculo2 = 0;
 
 
 
-    function startGame() {
-        birdBottom -= gravity;
-        bird.style.bottom = birdBottom + 'px';
-        bird.style.left = birdLeft + 'px';
-    }
-    let gameTimerId = setInterval(startGame, 20)
+function startGame() {
+    birdBottom -= gravity;
+    bird.style.bottom = birdBottom + 'px';
+    bird.style.left = birdLeft + 'px';
+}
+let gameTimerId = setInterval(startGame, 20)
 
 
 
@@ -50,44 +51,56 @@ let debug = "";
 //     return coin;
 // }
 function generateObstacle() {
-    let obstacleLeft=1100//--> se empiezan a dibujar afuera por esto ->container.getBoundingClientRect().width;
+    let obstacleLeft = 1600//--> se empiezan a dibujar afuera por esto ->container.getBoundingClientRect().width;
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
-    let coin=document.createElement('div');
+    let coin = document.createElement('div');
+    let obstacle2 = document.createElement('div');
+
+
 
     // if (isGameOver==false) {
     //     console.log("gameover entra a dibujar");
-        bottomPipe.classList.add('bottomPipe');
-        topPipe.classList.add('topPipe');
-        coin.classList.add('coin');
+    bottomPipe.classList.add('bottomPipe');
+    topPipe.classList.add('topPipe');
+    coin.classList.add('coin');
     // }
-    let heightTpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height/2 - 100)-50) + 50);//170
-    let heightBpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height - heightTpipe - 75)-50) + 50);//170
-    let coinPosition= Math.floor(Math.random() * ((pipeline.getBoundingClientRect().height /2)));
-     console.log("coin pos" + coinPosition);
-    topPipe.style.height = `${heightTpipe}px`;  
-    if(heightBpipe <= 300){
+
+    if (contObtaculo2 = 1) {
+        obstacle2.classList.add('obstacle2');
+    }
+
+    let heightTpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height / 2 - 100) - 50) + 50);//170
+    let heightBpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height - heightTpipe - 75) - 50) + 50);//170
+    let coinPosition = Math.floor(Math.random() * ((pipeline.getBoundingClientRect().height / 2)));
+    let obstacle2Position = Math.floor(Math.random() * ((pipeline.getBoundingClientRect().height / 2)));
+    console.log("coin pos" + coinPosition);
+    topPipe.style.height = `${heightTpipe}px`;
+    if (heightBpipe <= 300) {
         bottomPipe.style.height = `${heightBpipe}px`;
-    }else{
+    } else {
         heightBpipe = 299;
         bottomPipe.style.height = `${heightBpipe}px`;
     }
-    let marginBottomPipe=container.getBoundingClientRect().height-heightBpipe;
-    bottomPipe.style.marginTop=`${marginBottomPipe}px`;
+    let marginBottomPipe = container.getBoundingClientRect().height - heightBpipe;
+    bottomPipe.style.marginTop = `${marginBottomPipe}px`;
     pipeline.appendChild(topPipe);
     pipeline.appendChild(bottomPipe);
     pipeline.appendChild(coin);
-  
-    bottomPipe.style.width='60px';  
-    topPipe.style.width='60px';
-    coin.style.top= `${coinPosition}px`;
+    pipeline.appendChild(obstacle2);
+
+    bottomPipe.style.width = '60px';
+    topPipe.style.width = '60px';
+    coin.style.top = `${coinPosition}px`;
+    obstacle2.style.top = `${obstacle2Position}px`;
     let timerId = setInterval(moveObstacle, 20);
     function moveObstacle() {
-        if(!isGameOver){
-            obstacleLeft -=2;
+        if (!isGameOver) {
+            obstacleLeft -= 2;
             bottomPipe.style.left = obstacleLeft + 'px';
             topPipe.style.left = obstacleLeft + 'px';
-            coin.style.left=obstacleLeft + 'px';
+            coin.style.left = obstacleLeft + 'px';
+            obstacle2.style.left = obstacleLeft + 'px';
             let widthBird = bird.getBoundingClientRect().width;
             let heightBird = bird.getBoundingClientRect().height;
             let birdX = bird.getBoundingClientRect().x + widthBird;
@@ -100,57 +113,76 @@ function generateObstacle() {
             let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
             let topPipeWidth = topPipe.getBoundingClientRect().width;
             let topPipeHeight = topPipe.getBoundingClientRect().height;
-            let coinY=coin.getBoundingClientRect().y;
-            let coinX=coin.getBoundingClientRect().x;
-            let coinHeight=coin.getBoundingClientRect().height;
-            let coinWidth=coin.getBoundingClientRect().width;
+
+            let coinY = coin.getBoundingClientRect().y;
+            let coinX = coin.getBoundingClientRect().x;
+            let coinHeight = coin.getBoundingClientRect().height;
+            let coinWidth = coin.getBoundingClientRect().width;
+
+            let obstacle2Y = obstacle2.getBoundingClientRect().y;
+            let obstacle2X = obstacle2.getBoundingClientRect().x;
+            let obstacle2Height = obstacle2.getBoundingClientRect().height;
+            let obstacle2Width = obstacle2.getBoundingClientRect().width;
+
             let birdYT = bird.getBoundingClientRect().y;
-            if (obstacleLeft <-100 ) {
+            
+            if (obstacleLeft < -100) {
+                console.log(obstacleLeft);
                 clearInterval(timerId);
                 pipeline.removeChild(bottomPipe);
                 pipeline.removeChild(topPipe);
                 pipeline.removeChild(coin);
+                pipeline.removeChild(obstacle2);
+
+
             }
 
-            if (birdBottom<container.getBoundingClientRect().height*(-1)+heightBird || 
-                (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth 
-                    /*&& birdYT >= topPipeY*/ && birdYT <= topPipeY + topPipeHeight)||
-                ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
-                    && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
-                
-                clearInterval(timerId); 
+            if (birdBottom < container.getBoundingClientRect().height * (-1) + heightBird ||
+                (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth
+                    /*&& birdYT >= topPipeY*/ && birdYT <= topPipeY + topPipeHeight) ||
+                (birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
+                    && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight
+
+                    || birdX >= obstacle2X && birdX <= obstacle2X + obstacle2Width
+                    && birdYT >= obstacle2Y && birdYT <= obstacle2Y + obstacle2Height
+                )) {
+
+                clearInterval(timerId);
                 isGameOver = true;
-               
+
                 clearInterval(temp);
                 gameOver();
             }
-            if(birdX>=coinX && birdX<= coinX+coinWidth && birdYT<=coinY+ coinHeight && !isGameOver){
+            if (birdX >= coinX && birdX <= coinX + coinWidth && birdYT <= coinY + coinHeight && !isGameOver) {
                 points++;
-                document.getElementById("points").innerHTML = "SCORE "+`${points}`;
+                document.getElementById("points").innerHTML = "SCORE " + `${points}`;
                 pipeline.removeChild(coin);
             }
         }
     }
 
-    if (!isGameOver){
-        let random = Math.floor(Math.random() * (4000 - 500) + 500)
-        setTimeout(generateObstacle,random );//3000
-    }  
-} 
+    if (!isGameOver) {
+        let random1 = Math.floor(Math.random() * (4000 - 500) + 500)
+        let random2 = Math.floor(Math.random() * (5 - 1) + 1)
+        setTimeout(generateObstacle, random1);//3000
+        contObtaculo2 = random2;
+        console.log(random2)
+    }
+}
 
 
 generateObstacle();
 
 
 function gameOver() {
-    let gameOv=document.createElement('div');
+    let gameOv = document.createElement('div');
     gameOv.classList.add('gameOver');
     city.appendChild(gameOv);
     clearInterval(gameTimerId);
     isGameOver = true;
     pipeline.remove();
     document.removeEventListener('keyup', moveBird);
-    clearInterval(temp);    
+    clearInterval(temp);
 }
 
 let seconds = 59;
