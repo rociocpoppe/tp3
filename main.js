@@ -201,7 +201,7 @@ function timeLimit() {
 
     if (minutes == 0 && seconds == 0) {
         time = false;
-        document.getElementById("text").innerHTML = "Time's up";
+        document.getElementById("text").innerHTML = "Se acabo el tiempo";
         clearInterval(temp);
         gameOver();
     } else if (seconds == 0) {
@@ -211,10 +211,4 @@ function timeLimit() {
     seconds--;
 }
 
-function changeScenery(){
-    let selected = document.getElementById("changeScenery").value;
-    city.style.background=`url(${selected})`;
-    console.log(selected);
-}
 
-document.getElementById('changeScenery').addEventListener("click", changeScenery);
