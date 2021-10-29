@@ -6,6 +6,7 @@ const pipeline = document.getElementById("pipeline")
 const topPipe = document.getElementById("topPipe")
 const bottomPipe = document.getElementById("bottomPipe");
 const container=document.getElementById("gameContainer");
+const city=document.getElementById("city");
 let birdLeft = 10;
 let birdBottom = 100;
 let gravity = 3;
@@ -52,14 +53,14 @@ function generateObstacle() {
     let obstacleLeft=1100//--> se empiezan a dibujar afuera por esto ->container.getBoundingClientRect().width;
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
-    
-     let coin=document.createElement('div');
-    if (isGameOver==false) {
-        console.log("gameover " +isGameOver);
+    let coin=document.createElement('div');
+    let gameOv=document.createElement('div');
+    // if (isGameOver==false) {
+    //     console.log("gameover entra a dibujar");
         bottomPipe.classList.add('bottomPipe');
         topPipe.classList.add('topPipe');
-         coin.classList.add('coin');
-    }
+        coin.classList.add('coin');
+    // }
     let heightTpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height/2 - 100)-50) + 50);//170
     let heightBpipe = Math.floor(Math.random() * ((container.getBoundingClientRect().height - heightTpipe - 75)-50) + 50);//170
     let coinPosition= Math.floor(Math.random() * ((pipeline.getBoundingClientRect().height /2)));
@@ -76,9 +77,10 @@ function generateObstacle() {
     pipeline.appendChild(topPipe);
     pipeline.appendChild(bottomPipe);
     pipeline.appendChild(coin);
+    pipeline.appendChild(gameOv);   
     bottomPipe.style.width='60px';  
     topPipe.style.width='60px';
-     coin.style.top= `${coinPosition}px`;
+    coin.style.top= `${coinPosition}px`;
     let timerId = setInterval(moveObstacle, 20);
     function moveObstacle() {
         obstacleLeft -=2;
@@ -102,31 +104,28 @@ function generateObstacle() {
         let coinHeight=coin.getBoundingClientRect().height;
         let coinWidth=coin.getBoundingClientRect().width;
         let birdYT = bird.getBoundingClientRect().y;
-        if (obstacleLeft === 100 ) {
-            console.log("entra");
+        if (obstacleLeft <-100 ) {
             clearInterval(timerId);
-        
             pipeline.removeChild(bottomPipe);
             pipeline.removeChild(topPipe);
             pipeline.removeChild(coin);
         }
 
         if (birdBottom<container.getBoundingClientRect().height*(-1)+heightBird || 
-
             (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth 
                 /*&& birdYT >= topPipeY*/ && birdYT <= topPipeY + topPipeHeight)||
-
             ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
                 && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
-                    
-            debug = "CORTO";
-            gameOver();
+            gameOv.classList.add('gameOver');
+            city.appendChild(gameOv);
             clearInterval(timerId); 
-          
+            isGameOver = true;
+            pipeline.remove();
+            gameOver();
         }
-        if(birdX>=coinX && birdX<= coinX+coinWidth && birdYT<=coinY+ coinHeight){
+        if(birdX>=coinX && birdX<= coinX+coinWidth && birdYT<=coinY+ coinHeight && !isGameOver){
             points++;
-            document.getElementById("points").innerHTML = `${points}`;
+            document.getElementById("points").innerHTML = "SCORE "+`${points}`;
             pipeline.removeChild(coin);
         }
     }
@@ -134,12 +133,12 @@ function generateObstacle() {
     if (!isGameOver){
         let random = Math.floor(Math.random() * (4000 - 500) + 500)
         setTimeout(generateObstacle,random );//3000
-        // let randomCoin = Math.floor(Math.random() * (10000) + 1000)
-        // console.log("random" + randomCoin);
-        // setInterval(generateCoin,randomCoin);
     }  
 } 
+
+
 generateObstacle();
+
 
 function gameOver() {
     clearInterval(gameTimerId);

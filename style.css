@@ -1,126 +1,125 @@
-/* Eliminamos márgenes y ponemos fondo de página negro */
-/* html,body {
-    margin:0;
-  } */
-  
-  #gameContainer{
-    width: 100%;
-    height: 100%;
-    border: solid coral 3px;
-    
-  }
-  /* Animación del personaje */
-  #bird {
-    /* Tamaño de la viñeta individual */
-    /* border: solid black 3px; */
-    width:79px;
-    height:71px;
-    left: 220px;
-    bottom: 100px;
-    /* Cómo hay establecido un tamaño, centramos con margin:auto */
-    margin:auto;  
-    /* Cargamos el sprite (el repeat-x se puede omitir, por defecto se repite) */
-    background:url(bird2.png) repeat-x;
-    /* Aplicamos la animación "walk": 0.8seg, 6 viñetas y repetimos infinitamente */
-    animation:fly .4s steps(4) infinite;
-    /* animation: fall .4s ease-in-out; */
-    /* Posicionamos el personaje sobre el camino de madera */
-    position:relative;
-  
-  }
-  
-  /* Animación de personaje caminando: Simplemente mueve el sprite sheet hacia la izquierda, realizando el movimiento. */
-  @keyframes fly {
-    /* Partimos de la primera viñeta del sprite sheet */
-    0% { background-position:0 }
-    /* El tamaño total de ancho del sprite. Es negativo para que no "camine" hacia atrás */
-    100% { background-position:-325px }
-  }
-  
-  /* @keyframes fall{
-    0% {background-position: 100px}
-    100% {background-position: 700px}
-  } */
-  /* Animación del cielo. Efecto "Parallax", va más lento que el mar. */
-  #city {
-    background:url(back.png) repeat-X;
-    height: 600px;
-    
-    animation: movebg 9s linear infinite;
-    position: relative;
-  
-  }
+/* Se eliminan márgenes y se pone fondo de página oscuro */
+html,body {
+  margin:0;
+  background-color: darkslategray;
+} 
 
- /* // @keyframes down {
- //   0% {top: 150px}
- //   100% {top: 500px}
- // } */
+/*Se establece el ancho y el alto del div contenedor del juego*/
+#gameContainer{
+  width: 100%;
+  height: 100%;
+  /* border: solid coral 3px; */
+  
+}
+/* Se anima el personaje */
+#bird {
+  /* Tamaño de la viñeta individual */
+  width:79px;
+  height:71px;
+  /* Posicion del personaje*/
+  left: 220px;
+  bottom: 100px;
+  /*Cómo hay establecido un tamaño, se centra el personaje con margin:auto */
+  margin:auto;  
+  /* Se carga el spritesheet */
+  background:url(bird2.png) repeat-x;
+  /* Se aplica la animación "fly": 0.4seg, 4 viñetas y se repite infinitamente */
+  animation:fly .4s steps(4) infinite;
+  /* Se posiciona el personaje sobre la ciudad */
+  position:relative;
 
+}
 
-/* 
-@keyframes progressBar {
-  0% { width: var(--my-start-width); }
-  100% { width: var(--my-end-width); }
+/* Animación de personaje volando: se mueve el spritesheet hacia la izquierda, realizando el movimiento. */
+@keyframes fly {
+  /* Se parte de la primera viñeta del sprite sheet */
+  0% { background-position:0 }
+  /* El tamaño total de ancho del sprite. Es negativo para que no "vuele" hacia atrás */
+  100% { background-position:-325px }
+}
+
+/* @keyframes fall{
+  0% {background-position: 100px}
+  100% {background-position: 700px}
 } */
 
-  @keyframes up {
-    0% {top: var(myVar0, 150px);}
-    100% {top: var(myVar100, -500px);}
-  }
-
-
-  /* Animación del mar. */
-  #pipeline{
-    /* border: solid black 3px; */
-    /* background:url(p.png) no-repeat; */
-    /* height:100%; */
-    width:100%;
-    position: absolute; 
-     /* margin-left:900px;  */
-    animation: pipe .50s linear .20s infinite;
-    display: flex;
-    flex-direction: row;
-    
-  }
-
-  .topPipe{
-    border: solid black 3px;
-    /* height: 200px;  */
-    /* width: 100px;    */
-    background:url("pipes.png") ;
-    transform: rotate(180deg);
-    position: relative;
-
-  }
-
-  .bottomPipe{
-    border: solid black 3px;
-    /* height: 200px; */
-    /* width: 100px; */
-    /* margin-top: 300px;  */
-
-    position: relative;
-    background:url("pipes.png") ;
-  
-  }
-  
-  /* Animación para mover cielo y mar */
-  @keyframes movebg {
-    0% { background-position:300px } 
-    100% { background-position:0 }
-  }
-
-
-  @keyframes pipe {
-    0%   { background-position: 0px; }
-    100% { background-position: 100%; }
-  }
-
-.coin{
-  background: url("c.png");
-  border-radius: 50%;
-  width:46px;
-  height: 48px;
-  margin: 50px;
+/*se crea el background de la ciudad, cargando una imágen, con un alto determinado*/
+#city {
+  background:url(b3.jpg) repeat-X;
+  height: 650px;
+   /* Se aplica la animación "movebg": 0.9seg, especificando cómo debe avanzar 
+   la animación y se establece que se repite infinitamente */
+  animation: movebg 30s linear infinite;
   position: relative;
+
+}
+
+
+/* Div contenedor tuberias */
+#pipeline{
+  /* border: solid black 3px; */
+  /* background:url(p.png) no-repeat; */
+  /* height:100%; */
+  /*Se setea el ancho del div que contiene las tuberias*/
+  width:100%;
+  position: absolute; 
+    /* margin-left:900px;  */
+  /*Se aplica la animacion de nombre pipe, con 0.50 seg, especificando que sea de forma linear, y se repita 
+  infinitamente*/
+  animation: pipe .50s linear .20s infinite;
+  /*Se agrega display flex para poder lograr que las tubierias queden en fila*/
+  display: flex;
+  flex-direction: row;
+  
+}
+
+/*Se agrega la imágen para la tuberia de arriba, aplicando un transform rotate para poder utilizar la misma imágen
+ que la tuberia de abajo, pero con un giro de 180 grados. Se establece su posición*/
+.topPipe{
+  background:url("pipes.png") ;
+  transform: rotate(180deg);
+  position: relative;
+
+}
+/*Se agregando la imágen para la tuberia de abajo y se establece su posición*/
+.bottomPipe{
+  position: relative;
+  background:url("pipes.png") ;
+
+}
+
+/* Animación para mover ciudad, teniendo en cuenta el ancho de la imágen*/
+@keyframes movebg {
+  0% { background-position:1920px } 
+  100% { background-position:0 }
+}
+
+/*Animación para mover las tuberias*/
+@keyframes pipe {
+  0%   { background-position: 0px; }
+  100% { background-position: 100%; }
+}
+
+/*Se establece una imágen para las monedas, su tamaño y posición*/
+.coin{
+background: url("c.png");
+border-radius: 50%;
+width:46px;
+height: 48px;
+margin: 50px;
+position: relative;
+}
+
+/*Se da estilo al div contenedor de la información del juego*/
+#info{
+font-family:cursive;
+font-size: 30px;
+}
+
+.gameOver{
+  background: url("game.png");
+  width:623px;
+  height: 580px;
+  margin-left:400px;
+  position:relative;
 }
