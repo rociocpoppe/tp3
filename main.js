@@ -54,7 +54,7 @@ function generateObstacle() {
     let bottomPipe = document.createElement('div');
     let topPipe = document.createElement('div');
     let coin=document.createElement('div');
-    let gameOv=document.createElement('div');
+
     // if (isGameOver==false) {
     //     console.log("gameover entra a dibujar");
         bottomPipe.classList.add('bottomPipe');
@@ -77,56 +77,58 @@ function generateObstacle() {
     pipeline.appendChild(topPipe);
     pipeline.appendChild(bottomPipe);
     pipeline.appendChild(coin);
-    pipeline.appendChild(gameOv);   
+  
     bottomPipe.style.width='60px';  
     topPipe.style.width='60px';
     coin.style.top= `${coinPosition}px`;
     let timerId = setInterval(moveObstacle, 20);
     function moveObstacle() {
-        obstacleLeft -=2;
-        bottomPipe.style.left = obstacleLeft + 'px';
-        topPipe.style.left = obstacleLeft + 'px';
-        coin.style.left=obstacleLeft + 'px';
-        let widthBird = bird.getBoundingClientRect().width;
-        let heightBird = bird.getBoundingClientRect().height;
-        let birdX = bird.getBoundingClientRect().x + widthBird;
-        let birdY = bird.getBoundingClientRect().y + heightBird;
-        let bottomPipeX = bottomPipe.getBoundingClientRect().x;
-        let bottomPipeY = bottomPipe.getBoundingClientRect().y;
-        let topPipeX = topPipe.getBoundingClientRect().x;
-        let topPipeY = topPipe.getBoundingClientRect().y;
-        let bottomPipeWidth = bottomPipe.getBoundingClientRect().width;
-        let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
-        let topPipeWidth = topPipe.getBoundingClientRect().width;
-        let topPipeHeight = topPipe.getBoundingClientRect().height;
-        let coinY=coin.getBoundingClientRect().y;
-        let coinX=coin.getBoundingClientRect().x;
-        let coinHeight=coin.getBoundingClientRect().height;
-        let coinWidth=coin.getBoundingClientRect().width;
-        let birdYT = bird.getBoundingClientRect().y;
-        if (obstacleLeft <-100 ) {
-            clearInterval(timerId);
-            pipeline.removeChild(bottomPipe);
-            pipeline.removeChild(topPipe);
-            pipeline.removeChild(coin);
-        }
+        if(!isGameOver){
+            obstacleLeft -=2;
+            bottomPipe.style.left = obstacleLeft + 'px';
+            topPipe.style.left = obstacleLeft + 'px';
+            coin.style.left=obstacleLeft + 'px';
+            let widthBird = bird.getBoundingClientRect().width;
+            let heightBird = bird.getBoundingClientRect().height;
+            let birdX = bird.getBoundingClientRect().x + widthBird;
+            let birdY = bird.getBoundingClientRect().y + heightBird;
+            let bottomPipeX = bottomPipe.getBoundingClientRect().x;
+            let bottomPipeY = bottomPipe.getBoundingClientRect().y;
+            let topPipeX = topPipe.getBoundingClientRect().x;
+            let topPipeY = topPipe.getBoundingClientRect().y;
+            let bottomPipeWidth = bottomPipe.getBoundingClientRect().width;
+            let bottomPipeHeight = bottomPipe.getBoundingClientRect().height;
+            let topPipeWidth = topPipe.getBoundingClientRect().width;
+            let topPipeHeight = topPipe.getBoundingClientRect().height;
+            let coinY=coin.getBoundingClientRect().y;
+            let coinX=coin.getBoundingClientRect().x;
+            let coinHeight=coin.getBoundingClientRect().height;
+            let coinWidth=coin.getBoundingClientRect().width;
+            let birdYT = bird.getBoundingClientRect().y;
+            if (obstacleLeft <-100 ) {
+                clearInterval(timerId);
+                pipeline.removeChild(bottomPipe);
+                pipeline.removeChild(topPipe);
+                pipeline.removeChild(coin);
+            }
 
-        if (birdBottom<container.getBoundingClientRect().height*(-1)+heightBird || 
-            (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth 
-                /*&& birdYT >= topPipeY*/ && birdYT <= topPipeY + topPipeHeight)||
-            ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
-                && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
-            gameOv.classList.add('gameOver');
-            city.appendChild(gameOv);
-            clearInterval(timerId); 
-            isGameOver = true;
-            pipeline.remove();
-            gameOver();
-        }
-        if(birdX>=coinX && birdX<= coinX+coinWidth && birdYT<=coinY+ coinHeight && !isGameOver){
-            points++;
-            document.getElementById("points").innerHTML = "SCORE "+`${points}`;
-            pipeline.removeChild(coin);
+            if (birdBottom<container.getBoundingClientRect().height*(-1)+heightBird || 
+                (birdX >= topPipeX && birdX <= topPipeX + topPipeWidth 
+                    /*&& birdYT >= topPipeY*/ && birdYT <= topPipeY + topPipeHeight)||
+                ( birdX >= bottomPipeX && birdX <= bottomPipeX + bottomPipeWidth
+                    && birdY >= bottomPipeY && birdY <= bottomPipeY + bottomPipeHeight )) {
+                
+                clearInterval(timerId); 
+                isGameOver = true;
+               
+                clearInterval(temp);
+                gameOver();
+            }
+            if(birdX>=coinX && birdX<= coinX+coinWidth && birdYT<=coinY+ coinHeight && !isGameOver){
+                points++;
+                document.getElementById("points").innerHTML = "SCORE "+`${points}`;
+                pipeline.removeChild(coin);
+            }
         }
     }
 
@@ -141,15 +143,18 @@ generateObstacle();
 
 
 function gameOver() {
+    let gameOv=document.createElement('div');
+    gameOv.classList.add('gameOver');
+    city.appendChild(gameOv);
     clearInterval(gameTimerId);
-    console.log('game over');
     isGameOver = true;
+    pipeline.remove();
     document.removeEventListener('keyup', moveBird);
-    clearInterval(temp);
-    
+    clearInterval(temp);    
 }
+
 let seconds = 59;
-let minutes = 1;
+let minutes = 0;
 let temp = setInterval(timeLimit, 1000);
 let chain;
 let time = true;
@@ -166,6 +171,7 @@ function timeLimit() {
         time = false;
         document.getElementById("text").innerHTML = "Se acabo el tiempo";
         clearInterval(temp);
+        gameOver();
     } else if (seconds == 0) {
         minutes--;
         seconds = 60;
