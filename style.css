@@ -25,7 +25,7 @@ html,body {
   /* Se carga el spritesheet */
   background:url(img/bird2.png) repeat-x;
   /* Se aplica la animación "fly": 0.4seg, 4 viñetas y se repite infinitamente */
-  animation:fly .4s steps(4) infinite;
+  /* animation:fly .4s steps(4) infinite; */
   /* Se posiciona el personaje sobre la ciudad */
   position:relative;
 
@@ -111,6 +111,14 @@ margin: 50px;
 position: relative;
 }
 
+.coin2{
+  background: url("img/c2.png");
+  border-radius: 50%;
+  width:46px;
+  height: 48px;
+  margin: 50px;
+  position: relative;
+}
 /*Se da estilo al div contenedor de la información del juego*/
 #info{
 font-family:cursive;
@@ -158,4 +166,4 @@ font-size: 30px;
   0% { background-position:0 }
   /* El tamaño total de ancho del sprite. Es negativo para que no "vuele" hacia atrás */
   100% { background-position:570px }
-}
+} 
