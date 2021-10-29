@@ -7,10 +7,11 @@ html,body {
 /*Se establece el ancho y el alto del div contenedor del juego*/
 #gameContainer{
   width: 100%;
-  height: 80%;
+  height: 100%;
   /* border: solid coral 3px; */
   
 }
+
 /* Se anima el personaje */
 #bird {
   /* Tamaño de la viñeta individual */
@@ -22,7 +23,7 @@ html,body {
   /*Cómo hay establecido un tamaño, se centra el personaje con margin:auto */
   margin:auto;  
   /* Se carga el spritesheet */
-  background:url(bird2.png) repeat-x;
+  background:url(img/bird2.png) repeat-x;
   /* Se aplica la animación "fly": 0.4seg, 4 viñetas y se repite infinitamente */
   animation:fly .4s steps(4) infinite;
   /* Se posiciona el personaje sobre la ciudad */
@@ -45,7 +46,7 @@ html,body {
 
 /*se crea el background de la ciudad, cargando una imágen, con un alto determinado*/
 #city {
-  background:url(b3.jpg) repeat-X;
+  background:url(img/b3.jpg) repeat-X;
   height: 650px;
    /* Se aplica la animación "movebg": 0.9seg, especificando cómo debe avanzar 
    la animación y se establece que se repite infinitamente */
@@ -76,7 +77,7 @@ html,body {
 /*Se agrega la imágen para la tuberia de arriba, aplicando un transform rotate para poder utilizar la misma imágen
  que la tuberia de abajo, pero con un giro de 180 grados. Se establece su posición*/
 .topPipe{
-  background:url("pipes.png") ;
+  background:url("img/pipes.png") ;
   transform: rotate(180deg);
   position: relative;
 
@@ -84,7 +85,7 @@ html,body {
 /*Se agregando la imágen para la tuberia de abajo y se establece su posición*/
 .bottomPipe{
   position: relative;
-  background:url("pipes.png") ;
+  background:url("img/pipes.png") ;
 
 }
 
@@ -102,7 +103,7 @@ html,body {
 
 /*Se establece una imágen para las monedas, su tamaño y posición*/
 .coin{
-background: url("c.png");
+background: url("img/c.png");
 border-radius: 50%;
 width:46px;
 height: 48px;
@@ -117,7 +118,7 @@ font-size: 30px;
 }
 
 .gameOver{
-  background: url("game.png");
+  background: url("img/game.png");
   width:623px;
   height: 580px;
   margin-left:400px;
@@ -126,7 +127,7 @@ font-size: 30px;
 
 .obstacle2 {
 
-  background: url("obstaculo_2.png") repeat-x;
+  background: url("img/obstaculo_2.png") repeat-x;
   /* border-radius: 50%; */
   /* width:46px;
   height: 48px; */
